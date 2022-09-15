@@ -1,0 +1,28 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<suite thread-count="3" verbose="2" annotations="JDK" name="MobileWebAppTesting"
+       parallel="tests">
+
+    <listeners>
+        <listener class-name="org.uncommons.reportng.HTMLReporter"/>
+        <listener class-name="org.uncommons.reportng.JUnitXMLReporter"/>
+    </listeners>
+
+
+    <test name="RunTests_On_Android">
+        <parameter name="osName" value="android"/>
+        <parameter name="deviceName" value="Samsung Galaxy Note"/>
+        <parameter name="deviceUrl" value="http://192.168.0.193:4723/wd/hub"/>
+        <parameter name="udid" value="1fa71036"/>
+        <parameter name="browser-Type" value="chrome"/>
+        <parameter name="deviceVersion" value="6.0"/>
+        <parameter name="platformName" value="mobile"/>
+
+        <classes>
+            <class name="com.testsuite.openCart.OpenCartFunctionalities">
+            </class>
+        </classes>
+    </test>
+
+
+</suite>

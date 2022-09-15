@@ -1,0 +1,29 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<suite thread-count="2" verbose="2" annotations="JDK"
+	name="MobileWebAppTesting" parallel="tests">
+
+	<listeners>
+		<listener class-name="org.uncommons.reportng.HTMLReporter" />
+		<listener class-name="org.uncommons.reportng.JUnitXMLReporter" />
+	</listeners>
+
+
+	<test name="RunTests_On_iOS">
+		<!-- <parameter name="udid" value="afa8a7ddda9151b1c278f031dd7feb96d340daaa"
+			/> -->
+		<!-- mandatory -->
+		<parameter name="platformName" value="mobile" />
+		<parameter name="udid" value="afa8a7ddda9151b1c278f031dd7feb96d340daaa" />
+		<parameter name="deviceUrl" value="http://192.168.0.193:4723/wd/hub" />
+		<parameter name="deviceName" value="iPhone" />
+		<parameter name="deviceVersion" value="11.2.2" />
+		<parameter name="osName" value="ios" />
+
+		<classes>
+			<class name="com.testsuite.openCart.OpenCartFunctionalities" />
+		</classes>
+	</test>
+
+
+</suite>

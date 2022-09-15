@@ -1,0 +1,14 @@
+{
+    "fields": {
+       "project":
+       { 
+          "key": "TP"
+       },
+      
+       "summary": "Automation Issue : Test summary in IN Project",
+       "description": "Creating of an issue using project keys and issue type names using the REST API",
+       "issuetype": {
+          "name": "Task"
+                    }
+   }
+}

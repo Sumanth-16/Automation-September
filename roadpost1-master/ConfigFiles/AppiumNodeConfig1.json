@@ -1,0 +1,27 @@
+
+{
+"capabilities":
+[
+{
+"browserName": "CHROME",
+"device": "GT-I9300",
+"version":"4.3",
+"maxInstances": 1,
+"platform":"ANDROID"
+}
+],
+"configuration":
+{
+"cleanUpCycle":2000,
+"timeout":10000,
+"proxy": "org.openqa.grid.selenium.proxy.DefaultRemoteProxy", 
+"url":"http://0.0.0.0:4723/wd/hub",
+"maxSession": 4,
+"port": 4723,
+"host": "0.0.0.0",
+"register": true,
+"registerCycle": 5000,
+"hubPort": 4444,
+"hubHost": "localhost"
+}
+}

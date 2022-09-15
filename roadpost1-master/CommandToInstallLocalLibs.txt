@@ -1,0 +1,2 @@
+
+mvn org.apache.maven.plugins:maven-install-plugin:2.5.2:install-file  -Dfile=/Resources/lib/selenium-server-standalone-3.4.0.jar    -DgroupId=SeleniumStandalonejar -DartifactId=library -Dversion=1.0 -Dpackaging=jar  -DlocalRepositoryPath=./Resources/lib

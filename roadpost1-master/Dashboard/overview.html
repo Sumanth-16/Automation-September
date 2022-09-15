@@ -1,0 +1,282 @@
+<html>
+
+<head>
+    <title>Test Execution Dashboard</title>
+    <script type="text/javascript" src="lib/dashboard.js"></script>
+    <meta http-equiv="refresh" content="100">
+    <link type="text/css" rel="stylesheet" href="lib/dasboard_StyleSheet.css">
+    <link rel="stylesheet" href="lib/sortable-theme-dark.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+    <script src="lib/sorttable.js"></script>
+    <script type="text/javascript" src="lib/loader.js"></script>
+    <script type="text/javascript">
+        var allSpan = document.getElementsByTagName('SPAN');
+        for (var i = 0; i < allSpan.length; i++) {
+            allSpan[i].onclick = function () {
+                if (this.parentNode) {
+                    var childList = this.parentNode.getElementsByTagName('UL');
+                    for (var j = 0; j < childList.length; j++) {
+                        var currentState = childList[j].style.display;
+                        if (currentState == "none") {
+                            childList[j].style.display = "block";
+                        } else {
+                            childList[j].style.display = "none";
+                        }
+                    }
+                }
+            }
+        }
+
+    </script>
+</head>
+
+<body onload="runtimereport()">
+<script language="javascript" type="text/javascript">
+</script>
+<div id="mySidenav" class="sidenav">
+    <a class="closebtn" onclick="closeNav()">
+        <i class="fa fa-angle-left"></i> Collapse</a>
+    <td>
+        <img src="../Dashboard/images/ZenQ-Logo.png" height="40" width="99">
+    </td>
+    <!-- <td><p style="color: #0b6690; font-size: 17px;">Automation Dashboard</p></td>-->
+    <br></br>
+
+    <a href="#" onclick="window.location.reload()">
+        <i class="fa fa-refresh"></i> Refresh</a>
+    <a href="#Overview" onclick="openTab(event, 'Overview')" id="defaultOpen">
+        <i class="fa fa-home"></i> Overview</a>
+    <a href="#Trends" onclick="openTab(event, 'Chart')">
+        <i class="fa fa-bar-chart"></i> Trends </a>
+    <a href="#info" onclick="openTab(event, 'Info')">
+        <i class="fa fa-info"></i> Execution Info </a>
+</div>
+
+<div id="main">
+    <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; </span>
+
+    <div class="topHeader">
+        <div id="topHeader_child" align="middle">
+            <table>
+                <tbody>
+                <tr>
+                    <td>
+                        <img width="140" height="55" alt="ZenQ" src="../Dashboard/images/ZenQ-Logo.png">
+                    </td>
+                    <td>
+                        <p style="color: #0b6690; font-size: 27px;margin-left:10px;font-family:Candara;">Automation
+                            Runtime Dashboard </p>
+                    </td>
+                    <td>
+                        <a class='bton' href="overview.html"
+                           style='text-align: center;border-radius: 50px;font-family:Candara; font-size: 1.2em; margin-left:20px'>
+                            <i class="fa fa-refresh"></i> Refresh</a>
+                    </td>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+            function openNav() {
+                document.getElementById("mySidenav").style.width = "235px";
+                document.getElementById("main").style.marginLeft = "235px";
+                document.body.style.backgroundColor = "rgba(0,0,0,0.4)";
+            }
+
+            function closeNav() {
+                document.getElementById("mySidenav").style.width = "0";
+                document.getElementById("main").style.marginLeft = "0";
+                document.body.style.backgroundColor = "white";
+            }
+
+    </script>
+
+
+    <!-- <table class='overviewTable'>
+        <tr>
+            <th id='headersuite' class='header suite' width='100%'>Test Execution Summary</th>
+        </tr>
+    </table> -->
+
+    <div id="Overview" class="tabcontent">
+        <table class='overview' style="margin-left:45px; background: #158CBA" width='95%'>
+
+            <!--   <br></br>-->
+            <tbody>
+            <tr id='SuiteHeader' class='columnHeadings'>
+                <th id='SUITE_NAME'>INPROGRESS</th>
+                <th>Total no of scripts</th>
+                <th>Executed so far</th>
+                <th>Passed</th>
+                <th>Failed</th>
+                <th>Skipped</th>
+                <!--<th>Total time(Seconds)</th>-->
+            </tr>
+            <tr id='suitestatus'>
+                <td id='SUITE_STATUS' class='totalLabel'>INPROGRESS</td>
+                <td class='total number' id='TOTAL_TEST_SCRIPTS'></td>
+                <td class='executed number' id='executed'></td>
+                <td class='passed number' id='passed'></td>
+                <td class='failed number' id='failed'></td>
+                <td class='skipped number' id='skipped'></td>
+                <!--<td class='executing time' id='totalTime'></td>-->
+            </tr>
+            </tbody>
+        </table>
+
+        <br>
+        </br>
+
+        <table frame="box" border='2' style="margin-left:45px" width='95%' id='testcases'
+               class="sortable sortable-theme-bootstrap" data-sortable>
+            <tbody id='testcasesheader'>
+            <tr>
+                <th class="header suite sorttable_nosort" width='5%' colspan="1">Sl.No</th>
+                <th class="header suite" width='25%' colspan="1">Test</th>
+                <th class="header suite" width='15%' colspan="1">Run Status</th>
+                <th class="header suite" width='35%' colspan="1">Exception Info</th>
+                <th class="header suite sorttable_nosort" width='15%' colspan="1">Duration</th>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+    <div id="Chart" class="tabcontent">
+        <table class="columns" style="margin-left:45px">
+            <tr>
+                <td>
+                    <div id="piechart_div" style="border: 1px solid #ccc"></div>
+                </td>
+                <td>
+                    <div id="barchart_div" style="border: 1px solid #ccc"></div>
+                </td>
+                <script type="text/javascript">
+                        google.charts.load('current', { 'packages': ['corechart'] });
+                        google.charts.setOnLoadCallback(drawChart);
+                        google.charts.setOnLoadCallback(drawBarChart);
+
+                        function drawChart() {
+                            var pNo = document.getElementById("passed").innerHTML;
+                            var fNo = document.getElementById("failed").innerHTML;
+                            var sNo = document.getElementById("skipped").innerHTML;
+                            var data = google.visualization.arrayToDataTable([
+                                ['Tests', 'count'],
+                                ['Passed', parseInt(pNo)],
+                                ['Failed', parseInt(fNo)],
+                                ['Skipped', parseInt(sNo)],
+                            ]);
+                            var options = {
+                                chartArea: { left: 170 },
+                                'title': 'PieChart: Test Status',
+                                'width': 550,
+                                'height': 500,
+                                'backgroundColor': '#F1F7F9',
+                                pieSliceTextStyle: {
+                                    color: 'black',
+                                },
+                                pieSliceText: 'percentage',
+                                pieHole: 0.4,
+                                colors: ['#44aa44', '#ff4444', '#ffaa00']
+                            };
+                            var chart = new google.visualization.PieChart(document.getElementById('piechart_div'));
+                            chart.draw(data, options);
+                        }
+
+                        function drawBarChart() {
+                            var pNo = document.getElementById("passed").innerHTML;
+                            var fNo = document.getElementById("failed").innerHTML;
+                            var sNo = document.getElementById("skipped").innerHTML;
+                            var data = google.visualization.arrayToDataTable([
+                                ['Tests', 'count', { role: "style" }],
+                                ['Passed', parseInt(pNo), '#44aa44'],
+                                ['Failed', parseInt(fNo), '#ff4444'],
+                                ['Skipped', parseInt(sNo), '#ffaa00'],
+                            ]);
+                            var barchart_options = {
+                                title: 'Barchart: Test Status',
+                                width: 550,
+                                height: 500,
+                                'backgroundColor': '#F1F7F9',
+                                legend: 'none',
+                            };
+                            var barchart = new google.visualization.ColumnChart(document.getElementById('barchart_div'));
+                            barchart.draw(data, barchart_options);
+                        }
+
+                </script>
+            </tr>
+        </table>
+    </div>
+
+    <script>
+            function openTab(evt, tabName) {
+                var i, tabcontent, tablinks;
+                tabcontent = document.getElementsByClassName("tabcontent");
+                for (i = 0; i < tabcontent.length; i++) {
+                    tabcontent[i].style.display = "none";
+                }
+                tablinks = document.getElementsByClassName("tablinks");
+                for (i = 0; i < tablinks.length; i++) {
+                    tablinks[i].className = tablinks[i].className.replace(" active", "");
+                }
+                document.getElementById(tabName).style.display = "block";
+                evt.currentTarget.className += " active";
+            }
+            document.getElementById("defaultOpen").click();
+
+    </script>
+
+    <div id="Info" class="tabcontent">
+        <!--   <br></br>-->
+        <span class="label-info">Environment</span>
+        <table class="infoData" frame="box" style="margin-left:250px;width:50%;color: #158CBA;">
+            <!-- <span class="label-info" style="margin-left:90px;margin-bottom: 50px; width:40%;">Environment</span> -->
+            <tbody id='test_info'>
+            <tr>
+                <th class="info_suite">Parameter</th>
+                <th class="info_suite">Value</th>
+            </tr>
+
+            <tr id='suiteinfo_Duration'>
+                <td id='Duration'>Suit Duration</td>
+                <td id='SUITE_EXECUTION_DURATION'>...</td>
+            </tr>
+
+            <tr id='suiteinfo_Browser'>
+                <td id='Browser'>Browser Name</td>
+                <td id='BROWSER_NAME'>...</td>
+            </tr>
+
+            <tr id='suiteinfo_Java'>
+                <td id='Java'>Java Version</td>
+                <td id='JAVA_VERSION'>...</td>
+            </tr>
+
+            <tr id='suiteinfo_Selenium'>
+                <td id='Selenium'>Selenium Version</td>
+                <td id='SELENIUM_VERSION'>...</td>
+            </tr>
+
+            <tr id='suiteinfo_OS'>
+                <td id='OS'>OS Name</td>
+                <td id='OS_NAME'>...</td>
+            </tr>
+
+            <tr id='suiteinfo_User'>
+                <td id='User'>System Name</td>
+                <td id='SYSTEM_NAME'>...</td>
+            </tr>
+
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+</body>
+
+</html>

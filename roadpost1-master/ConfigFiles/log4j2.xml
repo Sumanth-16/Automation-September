@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration name="ConfigTest" status="WARN" packages="log4j">
+	<Appenders>
+		<Console name="CONSOLE" target="SYSTEM_OUT">
+			<PatternLayout pattern="%5p %d{h:mm a}  %M - %m%n" />
+		</Console>
+		<File name="LOGFILE"
+			fileName=".//Automation Reports//Logs.log" append="false">
+			<PatternLayout pattern="%color - %m%n - %d{dd-MM-yyyy HH:mm:ss} %Br"/>
+		</File>
+	</Appenders>
+	<Loggers>
+		<Root level="info">
+			<AppenderRef ref="CONSOLE" />
+			<AppenderRef ref="LOGFILE" />
+		</Root>
+	</Loggers>
+
+</Configuration>

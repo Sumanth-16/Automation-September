@@ -1,0 +1,99 @@
+<html>
+<body>
+<table style="width:830px;font-family: Candara;border:1px solid #0b6690;background-color:#white;margin-left:20px;">
+	<tr>
+		<th>
+			<table style="width:830px;height:75px;font-family: Candara;border-bottom:1px solid #0b6690;background-color:#eaedf3;">
+			<tr><td><a href=${clientUrl!"No ClientUrl attached"} target="_blank"><img src=${clientLogoUrl!"No ClientLogoUrl attached"} height="50" width="130" align="left" ></a></td>
+				<td><a href="http://www.zenq.com" target="_blank"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGpBBpJTVfRa7Egrg9kR1fcqK1ZV5JL_OZ7k0VLbAp8NpL_o_F" height="50" width="130" align="right" ></a></td>
+			 </tr>
+		    </table>
+ 	    </th>
+	</tr>
+	<tr>
+    	<td>
+        	<table style="width:760px;-align:left;font-family: Candara;margin-left:30px;margin-right:20px;">
+             	<tr>      			
+  					<td style="color:#0b6690;text-align:center;"><h1 >Automation Tests Report</h1></td>
+    			</tr>
+            </table>
+  	 	</td>
+    </tr>
+    
+    <tr>
+    	<td>
+        	<table style="width:760px;font-family: Candara;margin-left:40px;"  align="center">
+             	<tr>
+        			<td>
+                    	<table style="width:500px"  align="center">
+  						<tr >
+	  						<th style="border-radius: 10px;width:140px;padding: 10px; background-color:#0b6690;color: white; font-family: Candara" align="center">Test Name</th>
+	  						<th style="border-radius: 10px;width:70px;padding: 10px; background-color:#0b6690;color: white;font-family: Candara " align="center">Passed</th>
+	  						<th style="border-radius: 10px;width:70px;padding: 10px;  background-color:#0b6690;color: white;font-family: Candara " align="center">Skipped</th>
+	  						<th style="border-radius: 10px;width:70px;padding: 10px; background-color:#0b6690;color: white; font-family: Candara" align="center">Failed</th>
+  						</tr>
+  							<#if testsCount??>
+  							<#list testsCount as testname, count>
+  						<tr style="background-color:#eaedf3;border:none">
+  							<td style="border-radius: 10px;width:140px;padding: 10px;font-family: Candara" align="center">${testname}</td>
+  							<#list count as c>
+  							<td style="border-radius: 10px;width:70px;padding: 10px;font-family: Candara" align="center">${c}</td>
+  							</#list>
+	  					</tr>
+	  						</#list>
+  							<#else>
+                            </#if>
+  			  			<tr style="background-color:#eaedf3;border:none">
+	  						<td style="border-radius: 10px;width:140px;padding: 10px; font-weight:bold; color:black;text-align:center">Total</td>
+	  						<#if totalCount??>
+	  						<#list totalCount as totalCount>
+	  						<td  style="border-radius: 10px;width:70px;padding: 10px; border: 1px solid #f3f3F3;font-weight:bold;color:black" align="center">${totalCount}</td>  
+                            </#list>
+	  						<#else>
+	  						</#if>
+	  					</tr>		
+  						</table>
+                    </td>                    
+  					
+    			</tr>
+				<tr>
+					<td style="width:250px;vertical-align:top;" align="center">
+                   		 <img src="https://chart.googleapis.com/chart?chs=225x225&amp;chd=t:${Tpass!"Null"},${Tskip!"Null"},${Tfail!"Null"}&&chds=a&chco=3BB032|DCA81C|BD2D1C|000000&chf=bg,s,white&amp;cht=p3&amp;chdl=Pass - ${Tpass!"Null"}|Skip - ${Tskip!"Null"}|Fail - ${Tfail!"Null"}|Total - ${Ttotal!"Null"}" align="center" />	
+  						 <div style="border-radius:10px;background:white;font-family: Candara;padding:8px;width:220px;height:13px;color:#0b6690;font-weight:bold;text-align:center;font-size:14px" align="center">Execution Time - ${etime!"No Info."}      </div>
+                    </td>
+				</tr>
+            </table>
+  	 	</td>
+    </tr>
+    <tr>
+        <td>
+	   	 	<#if failureCount??>
+	  		<#list failureCount as f>
+	  			 <table style="width:760px;font-family: Candara;margin-left:30px;margin-right:20px;font-family: Candara;">
+	 				<tr>
+	  					<th style="border-radius: 10px;padding: 10px;border: 1px solid #000;width:800px;background-color: #0b6690;color: white;border:none" align="left"> Failed Test Cases</th>
+	  				</tr>
+	  					<#if failureSuites??>
+	  					<#list failureSuites as SuiteFileName, failedtests>
+	  	  			<tr>
+						<td style="border-radius: 10px;text-align:left;padding: 10px;border: 1px solid grey;width:800px;background-color: #d9d9d9;color: black;border:none">${SuiteFileName}</td>
+	                </tr>
+					<tr>
+					    <td>			
+							<table class="col" style="border-collapse: collapse;font-family: Candara;"><#if failedtests??><#list failedtests as ft>
+							<tr>				
+							<td style="padding: 10px;border: 1px solid grey;width:800px;border:none">${ft!" "}</td> 
+							</tr></#list></#if>
+							</table>
+						</td>				
+					</tr>
+				 </#list>
+				 </#if>
+	  			 </table> 
+	 		</#list>
+	 		</#if>
+ 		</td>
+     </tr>
+</table>
+</body>
+</html>
